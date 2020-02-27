@@ -1,0 +1,44 @@
+{% extends "admin/templates/admin_template.html" %}
+
+{% block title %}Vision General{% endblock %}
+
+{% block main %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Vision General</h1>
+    </div>
+  </div>
+  <div class="row">
+  <table class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Quien</th>
+      <th scope="col">Cuanto</th>
+      <th scope="col">Concepto</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+	
+    {% for  operation in operations %}
+    {% if operation['direccion']=='1' %}
+<tr class="table-success">
+    {% else %}
+<tr class="table-danger">
+	{% endif %}
+	<td scope="row">{{ loop.index }}</td>
+	<td>{{ operation['user'] }}</td>
+<td>{{ operation['cuantia'] |int * operation['direccion']|int }}</td>
+<td>{{ operation['concepto'] }}</td>
+<td>{{ operation['date'] }}</td>
+    {% endfor %}
+ </tbody>
+  </div>
+</table>
+</div>
+
+{% endblock %}
+

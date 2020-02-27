@@ -1,0 +1,68 @@
+{% extends "admin/templates/admin_template.html" %}
+
+{% block title %}Añadir apunte{% endblock %}
+
+{% block main %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Añadir apunte</h1>
+    </div>
+  </div>
+  <div class=row style="float: center;">
+  <form  method="POST" action=/admin/add>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="cuantia">Cuantia</label>  
+  <div class="col-md-12">
+  <input id="cuantia" name="cuantia" type="text" placeholder="Cuantia en euros" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="direccion">Entrada/Salida</label>
+  <div class="col-md-12">
+  <div class="radio">
+    <label for="direccion-0">
+      <input type="radio" name="direccion" id="direccion-0" value="1" checked="checked">
+      Entrada
+    </label>
+	</div>
+  <div class="radio">
+    <label for="direccion-1">
+      <input type="radio" name="direccion" id="direccion-1" value="-1">
+      Salida
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="concepto">Concepto</label>  
+  <div class="col-md-12">
+  <input id="concepto" name="concepto" type="text" placeholder="Fiesta X, compra Y..." class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="button"></label>
+  <div class="col-md-12">
+    <button id="button" name="button" class="btn btn-primary">Añadir</button>
+  </div>
+</div>
+
+</form>
+  
+  </div>
+</div>
+
+
+{% endblock %}
+
