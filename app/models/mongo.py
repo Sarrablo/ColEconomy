@@ -1,13 +1,13 @@
 from pymongo import MongoClient
 
+
 class MongoModel():
-    
     def __init__(self):
         self.client = MongoClient('localhost', 27017)
         self.database = self.client.bunuel
 
     def find_by_user(self, user):
-        user = self.database.users.find_one({"user":user})
+        user = self.database.users.find_one({"user": user})
         return user
 
     def compare_by_pass(self, user, password):
@@ -23,6 +23,3 @@ class MongoModel():
 
     def find_operations(self):
         return list(self.database.operations.find().sort("_id", -1))
-
-
-

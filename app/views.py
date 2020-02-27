@@ -4,7 +4,8 @@ from flask import request, redirect, session, url_for
 from .models import MongoModel
 
 app.config["SECRET_KEY"] = "07246f1339134fbda4d2aa2dbab8cc8d"
-mongo = MongoModel() 
+mongo = MongoModel()
+
 
 @app.route("/")
 def index():
@@ -38,7 +39,8 @@ def sign_up():
                 return redirect(url_for("admin_dashboard"))
             else:
                 feedback = f"Error on user or password"
-                return render_template("public/sign_up.html", feedback=feedback)
+                return render_template("public/sign_up.html",
+                                       feedback=feedback)
 
         return redirect(request.url)
 
