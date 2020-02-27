@@ -13,7 +13,10 @@ def admin_dashboard():
         return redirect(url_for("sign_up"))
     else:
         operations = mongo.find_operations()
-        return render_template("admin/dashboard.html", operations=operations)
+        total = 0
+        for operation in operations:
+            total = total+ float(operation['cuantia']) * int(operation["direccion"]) 
+        return render_template("admin/dashboard.html", operations=operations, total=total)
 
 
 @app.route("/admin/add", methods=["GET", "POST"])
@@ -26,6 +29,7 @@ def add_dashboard():
             data = req.to_dict(flat=True)
             data["user"] = session.get("USERNAME")
             data["date"] = datetime.today()
+            data["cuantia"] = abs(int(data["cuantia"]))
             mongo.insert_in_operations(data)
             return redirect(url_for("admin_dashboard"))
         else:
