@@ -19,6 +19,7 @@
       <th scope="col">Cuantia</th>
       <th scope="col">Concepto</th>
       <th scope="col">Fecha</th>
+      <th scope="col">Accion</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,7 @@
 <td>{{ operation['cuantia'] |int * operation['direccion']|int }}</td>
 <td>{{ operation['concepto'] }}</td>
 <td>{{ operation['date'] }}</td>
+<td><form method="POST" action="/admin/del"><input type="hidden" value={{ operation['_id'] }} name="identifier"><button type="submit" class="btn btn-danger">Danger</button></form></td>
     {% endfor %}
     <tr>
 	    <td></td>

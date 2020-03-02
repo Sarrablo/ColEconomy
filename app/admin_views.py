@@ -19,6 +19,18 @@ def admin_dashboard():
         return render_template("admin/dashboard.html", operations=operations, total=total)
 
 
+@app.route("/admin/del", methods=["POST"])
+def delete_dashboard():
+    if session.get("USERNAME") is None:
+        return redirect(url_for("sign_up"))
+    else:
+        req = request.form
+        data = req.to_dict(flat=True)
+        print(data)
+        mongo.delete_operations(data['identifier'], session.get("USERNAME"))
+        return redirect(url_for("admin_dashboard"))
+
+
 @app.route("/admin/add", methods=["GET", "POST"])
 def add_dashboard():
     if session.get("USERNAME") is None:
