@@ -18,6 +18,15 @@ def admin_dashboard():
             total = total+ float(operation['cuantia']) * int(operation["direccion"]) 
         return render_template("admin/dashboard.html", operations=operations, total=total)
 
+@app.route("/admin/activities/dashboard")
+def activities_dashboard():
+    if session.get("USERNAME") is None:
+        return redirect(url_for("sign_up"))
+    else:
+        operations = mongo.find_operations()
+        return render_template("admin/activities/dashboard.html")
+
+
 
 @app.route("/admin/del", methods=["POST"])
 def delete_dashboard():
@@ -46,6 +55,23 @@ def add_dashboard():
             return redirect(url_for("admin_dashboard"))
         else:
             return render_template("admin/add.html")
+
+@app.route("/admin/activities/add", methods=["GET", "POST"])
+def activities_add_dashboard():
+    if session.get("USERNAME") is None:
+        return redirect(url_for("sign_up"))
+    else:
+        if request.method == "POST":
+            req = request.form
+            data = req.to_dict(flat=True)
+            data["user"] = session.get("USERNAME")
+            data["date"] = datetime.today()
+            data["cuantia"] = abs(int(data["cuantia"]))
+            mongo.insert_in_operations(data)
+            return redirect(url_for("admin_dashboard"))
+        else:
+            return render_template("admin/activities/add.html")
+
 
 
 @app.route("/admin/stock")
