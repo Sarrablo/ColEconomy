@@ -74,9 +74,9 @@ def activities_add_dashboard():
 
 
 
-@app.route("/admin/stock")
+@app.route("/admin/stock/dashboard")
 def stock_dashboard():
     if session.get("USERNAME") is None:
         return redirect(url_for("sign_up"))
     else:
-        return render_template("admin/stock.html")
+        return render_template("admin/stock/dashboard.html")
