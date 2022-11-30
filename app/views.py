@@ -9,7 +9,11 @@ mongo = MongoModel()
 
 @app.route("/")
 def index():
-    return render_template("public/index.html")
+    operations = mongo.find_operations()
+    total = 0
+    for operation in operations:
+        total = total+ float(operation['cuantia']) * int(operation["direccion"]) 
+    return render_template("public/index.html", operations=operations, total=total)
 
 
 @app.route("/about")

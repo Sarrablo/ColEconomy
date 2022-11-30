@@ -34,8 +34,11 @@
 	<td>{{ operation['user'] }}</td>
 <td>{{ operation['cuantia'] |int * operation['direccion']|int }}</td>
 <td>{{ operation['concepto'] }}</td>
-<td>{{ operation['date'] }}</td>
-<td><form method="POST" action="/admin/del"><input type="hidden" value={{ operation['_id'] }} name="identifier"><button type="submit" class="btn btn-danger">Danger</button></form></td>
+<td>{{ operation['date'].strftime('%Y/%m/%d') }}</td>
+<td>{% if operation['user'] == session.get('USERNAME')%}<form method="POST" action="/admin/del"><input type="hidden" value={{ operation['_id'] }} name="identifier"><button style="center" type="submit" class="btn btn-danger"> Borrar </button></form>
+	{% else %}
+	<form method="POST" action="#"><input type="hidden" value={{ operation['_id'] }} name="identifier"><button type="submit" class="btn btn-warning">Reportar</button></form>
+	{% endif %}</td>
     {% endfor %}
     <tr>
 	    <td></td>
